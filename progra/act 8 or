@@ -1,0 +1,156 @@
+#include <stdio.h>
+
+int main()
+{
+    int opt, coleccion[20], flag=0, num, opt1=0, flag2=0;
+    
+    for(int i=0; i<20; i++)
+    {
+        coleccion[i]=0;
+    }
+    
+    do
+    {
+        if (flag2==1)
+        {
+            for(int i=0; i<20; i++)
+            {
+                if(coleccion[i]==0)
+                {
+                    do
+                    {
+                        coleccion[i]=coleccion[i+1];
+                        i++;
+                    }while(i<20);
+                }
+    
+            }
+            
+            coleccion[19]=0;
+        }
+        
+        printf("\n\n1.Capturar número.");
+        printf("\n2.Listar números.");
+        printf("\n3.Buscar número.");
+        printf("\n0.Salir.");
+        printf("\nSelecciona una opción: ");
+        scanf("%i", &opt);
+        
+        switch (opt)
+        {
+            case 1:
+                
+                if(coleccion[19]>0)
+                {
+                    printf("No se pueden guardar más de 20 elementos. Elimina uno para agregar.");
+                }
+                
+                for(int i=0; i<20; i++)
+                {
+                    if(coleccion[i]==0)
+                    {
+                        printf("\nDame el número: ");
+                        scanf("%i", &coleccion[i]);
+                        i=20;
+                        
+                    }
+                }
+                break;
+                
+            case 2:
+                for(int i=0; i<20; i++)
+                {
+                    if(coleccion[i]!=0)
+                    {
+                        printf("\n[%i]: %i", i, coleccion[i]);
+                    }
+                }
+                
+                break;
+                
+            case 3:
+                printf("\nDame el número que quieres buscar: ");
+                scanf("%i", &num);
+                
+                for(int i=0; i<20; i++)
+                {
+                    if(num==coleccion[i])
+                    {
+                        flag=1;
+                        i=20;
+                    }
+                }
+                
+                if(flag==1)
+                {
+                    printf("\n1.Imprimir posición");
+                    printf("\n2.Eliminar número");
+                    printf("\n3.Modificar número");
+                    printf("\n4.Regresar");
+                    printf("\n\nSelecciona una opción: ");
+                    scanf("%i", &opt1);
+                    
+                    switch (opt1) {
+                        case 1:
+                            for(int i=0; i<20; i++)
+                            {
+                                if(num==coleccion[i])
+                                {
+                                    printf("\nPosición del numero %i: ubicado en la posición [%i]", coleccion[i], i);
+                            
+                                }
+                            }
+                            break;
+                            
+                        case 2:
+                            for (int i=0; i<20; i++)
+                            {
+                                if(num==coleccion[i])
+                                  {
+                                      coleccion[i]=0;
+                                      printf("\nNúmero eliminado");
+                                      flag2=1;
+                                  }
+                            }
+                            break;
+                            
+                        case 3:
+                            for (int i=0; i<20; i++)
+                            {
+                                if(num==coleccion[i])
+                                  {
+                                      printf("\n¿Cuál es el nuevo valor del numero %i ubicado en la posición %i?: ", coleccion[i], i);
+                                      scanf("%i", &num);
+                                      coleccion[i]=num;
+                                      printf("\nNúmero modificado");
+                                  }
+                            }
+                            break;
+                            
+                        case 4:
+                            break;
+                            
+                        default:
+                            printf("\nOpción no existente.");
+                            break;
+                    }
+                    
+                }
+                
+                else
+                {
+                    printf("\nNumero no encontrado.");
+                }
+                
+                break;
+                
+            default:
+                printf("\nOpcion inexistente.");
+                break;
+        }
+        
+    }while(opt!=0);
+    
+    
+    return 0;
+}
